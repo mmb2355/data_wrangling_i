@@ -10,6 +10,7 @@ This file is for doing data import
 
 ```{r}
 library(tidyverse)
+library(readxl)
 ```
 
 ```{r}
@@ -45,4 +46,28 @@ skimming
 
 ```{r}
 skimr::skim(pups_df)
+```
+
+## excel
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx")
+```
+
+look at data
+
+```{r}
+mlb_df
+```
+
+import FOTR words
+
+```{r}
+fotr_df = 
+  read_excel(
+    "data/LotR_Words.xlsx",
+    range = "B3:D6"
+  )
+
+fotr_df
 ```
