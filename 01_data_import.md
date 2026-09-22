@@ -21,6 +21,7 @@ library(tidyverse)
 
 ``` r
 library(readxl)
+library(haven)
 ```
 
 ``` r
@@ -171,3 +172,33 @@ mlb_df
     ## 10 Houston A…   615    5598  1442       95   0.258       1164          118    56
     ## # ℹ 20 more rows
     ## # ℹ 3 more variables: new_onbase <dbl>, new_slug <dbl>, new_obs <dbl>
+
+import FOTR words
+
+``` r
+fotr_df = 
+  read_excel(
+    "data/LotR_Words.xlsx",
+    range = "B3:D6"
+  )
+
+fotr_df
+```
+
+    ## # A tibble: 3 × 3
+    ##   Race   Female  Male
+    ##   <chr>   <dbl> <dbl>
+    ## 1 Elf      1229   971
+    ## 2 Hobbit     14  3644
+    ## 3 Man         0  1995
+
+## import SAS
+
+read in the PULSE dataset
+
+``` r
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
+```

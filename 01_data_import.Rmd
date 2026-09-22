@@ -11,6 +11,7 @@ This file is for doing data import
 ```{r}
 library(tidyverse)
 library(readxl)
+library(haven)
 ```
 
 ```{r}
@@ -70,4 +71,15 @@ fotr_df =
   )
 
 fotr_df
+```
+
+## import SAS
+
+read in the PULSE dataset
+
+```{r}
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
 ```
