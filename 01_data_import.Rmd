@@ -23,13 +23,42 @@ Import our first dataset
 
 ```{r}
 litters_df =
-  read_csv(file = "data/FAS_litters.csv")
+  read_csv(file = "data/FAS_litters.csv", skip = 10, col_names = FALSE)
+
+head(litters_df)
 
 litters_df = janitor::clean_names(litters_df)
 
 names(litters_df)
 
 view(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_character(),
+      `Litter Number` = col_character(),
+      `GD0 weight` = col_double(),
+      `GD18 weight` = col_double(),
+      `GD of Birth` = col_integer(),
+      `Pups born alive` = col_integer(),
+      `Pups dead @ birth` = col_integer(),
+      `Pups survive` = col_integer()
+    )
+  )
+
+tail(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_factor()
+    )
+)
+
+head(litters_df)
 ```
 
 import second dataset
@@ -83,3 +112,14 @@ pulse_df =
 
 pulse_df = janitor::clean_names(pulse_df)
 ```
+
+## what's bad about 'read.csv()'?
+
+```{r}
+pups_df_base =
+  read.csv("data/FAS_pups.csv")
+
+pups_df_base
+```
+
+won't show: lazy about variable names; super slow for big dataset
