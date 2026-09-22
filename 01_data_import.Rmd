@@ -2,6 +2,8 @@
 title: "Data Import"
 output: github_document
 date: "2026-09-22"
+editor_options: 
+  chunk_output_type: console
 ---
 
 This file is for doing data import
@@ -10,26 +12,37 @@ This file is for doing data import
 library(tidyverse)
 ```
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r}
+getwd()
+## [1] "C:/Users/brome/Downloads/data science/data_wrangling_i"
 ```
 
-## R Markdown
+Import our first dataset
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r}
+litters_df =
+  read_csv(file = "data/FAS_litters.csv")
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+litters_df = janitor::clean_names(litters_df)
 
-```{r cars}
-summary(cars)
+names(litters_df)
+
+view(litters_df)
 ```
 
-## Including Plots
+import second dataset
 
-You can also embed plots, for example:
+```{r}
+pups_df =
+  read_csv("data/FAS_pups.csv", skip = 3, na = c("","NA","."))
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+read_csv(
+        file = "C:/Users/brome/Downloads/data science/data_wrangling_i/data/FAS_litters.csv",
+        skip = 3)
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+skimming
+
+```{r}
+skimr::skim(pups_df)
+```
