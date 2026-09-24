@@ -1,0 +1,125 @@
+---
+title: "Data Import"
+output: github_document
+date: "2026-09-24"
+editor_options: 
+  chunk_output_type: console
+---
+
+This file is for doing data import
+
+```{r}
+library(tidyverse)
+library(readxl)
+library(haven)
+```
+
+```{r}
+getwd()
+## [1] "C:/Users/brome/Downloads/data science/data_wrangling_i"
+```
+
+Import our first dataset
+
+```{r}
+litters_df =
+  read_csv(file = "data/FAS_litters.csv", skip = 10, col_names = FALSE)
+
+head(litters_df)
+
+litters_df = janitor::clean_names(litters_df)
+
+names(litters_df)
+
+view(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_character(),
+      `Litter Number` = col_character(),
+      `GD0 weight` = col_double(),
+      `GD18 weight` = col_double(),
+      `GD of Birth` = col_integer(),
+      `Pups born alive` = col_integer(),
+      `Pups dead @ birth` = col_integer(),
+      `Pups survive` = col_integer()
+    )
+  )
+
+tail(litters_df)
+
+litters_df = 
+    read_csv(file = "./data/FAS_litters.csv",
+        na = c(".", "NA", ""),
+    col_types = cols(
+      Group = col_factor()
+    )
+)
+
+head(litters_df)
+```
+
+import second dataset
+
+```{r}
+pups_df =
+  read_csv("data/FAS_pups.csv", skip = 3, na = c("","NA","."))
+
+read_csv(
+        file = "C:/Users/brome/Downloads/data science/data_wrangling_i/data/FAS_litters.csv",
+        skip = 3)
+```
+
+skimming
+
+```{r}
+skimr::skim(pups_df)
+```
+
+## excel
+
+```{r}
+mlb_df = read_excel("data/mlb11.xlsx")
+```
+
+look at data
+
+```{r}
+mlb_df
+```
+
+import FOTR words
+
+```{r}
+fotr_df = 
+  read_excel(
+    "data/LotR_Words.xlsx",
+    range = "B3:D6"
+  )
+
+fotr_df
+```
+
+## import SAS
+
+read in the PULSE dataset
+
+```{r}
+pulse_df =
+  read_sas("data/public_pulse_data.sas7bdat")
+
+pulse_df = janitor::clean_names(pulse_df)
+```
+
+## what's bad about 'read.csv()'?
+
+```{r}
+pups_df_base =
+  read.csv("data/FAS_pups.csv")
+
+pups_df_base
+```
+
+won't show: lazy about variable names; super slow for big dataset

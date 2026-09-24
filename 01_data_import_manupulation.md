@@ -1,10 +1,14 @@
 Data Import
 ================
-2026-09-22
+2026-09-23
 
 This file is for doing data import
 
-``` r
+```{r}
+library(tidu)
+```
+
+``` {r}
 library(tidyverse)
 ```
 
