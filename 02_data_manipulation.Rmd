@@ -142,7 +142,6 @@ sometimes the first thing isn't a dataframe
 
 ```{r}
 litters_df |>
-  filter(group %in% c("Con7", "Con8")) |>
   lm(gd18_weight ~ gd0_weight, data = _)
 ```
 
@@ -154,4 +153,18 @@ litters_df |>
 
 litters_df |>
   pull(group)
+```
+
+never do `$`
+
+```{r}
+litters_df$group
+```
+
+pipes and viewing
+
+```{r}
+litters_df |>
+  filter(group %in% c("con7","con8"))
+view(litters_df)
 ```
